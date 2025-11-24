@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Chỉnh sửa danh mục</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        body { background: #eef1f7; font-family: "Segoe UI"; }
+        .sidebar {
+            width: 260px;
+            background: #2f3542;
+            color: white;
+            min-height: 100vh;
+        }
+        .sidebar .title {
+            font-size: 22px;
+            font-weight: 600;
+            padding: 20px;
+            border-bottom: 1px solid #3d4351;
+            text-align: center;
+        }
+        .sidebar a {
+            color: #cfd3da;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 20px;
+            text-decoration: none;
+            transition: 0.25s;
+        }
+        .sidebar a:hover { background: #57606f; color: white; }
+        .content-wrapper { flex-grow: 1; padding: 30px; }
+        .page-title { font-size: 28px; font-weight: 700; margin-bottom: 25px; }
+    </style>
+</head>
+
+<body>
+<div class="d-flex">
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <div class="title">Admin Panel</div>
+        <a th:href="@{/admin/index}"><i class="bi bi-speedometer2"></i> Dashboard</a>
+        <a th:href="@{/admin/food}"><i class="bi bi-box-seam"></i> Quản lý sản phẩm</a>
+        <a th:href="@{/admin/categories}"><i class="bi bi-tags"></i> Quản lý danh mục</a>
+        <a th:href="@{/admin/users}"><i class="bi bi-people"></i> Quản lý người dùng</a>
+        <a th:href="@{/admin/orders}"><i class="bi bi-receipt-cutoff"></i> Quản lý đơn hàng</a>
+        <a th:href="@{/logout}"><i class="bi bi-box-arrow-right"></i> Đăng xuất</a>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="content-wrapper d-flex justify-content-center">
+        <div class="card shadow-sm border-0" style="width: 1000px;">
+            <div class="card-header text-white text-center" style="background-color: #2f3542;">
+                <h5 class="mb-0"><i class="bi bi-pencil-square me-2"></i> Chỉnh sửa danh mục</h5>
+            </div>
+
+            <div class="card-body p-4">
+                <form th:action="@{'/admin/categories/edit/' + ${category.id}}" method="post">
+                    <div class="mb-3">
+                        <label for="name" class="form-label fw-semibold">Tên danh mục</label>
+                        <input type="text" class="form-control" id="name" name="name"
+                               th:value="${category.name}" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="description" class="form-label fw-semibold">Mô tả</label>
+                        <textarea class="form-control" id="description" name="description" rows="3"
+                                  th:text="${category.description}"></textarea>
+                    </div>
+
+                    <div class="text-end">
+                        <a th:href="@{/admin/categories}" class="btn btn-outline-secondary me-2">
+                            <i class="bi bi-arrow-left-circle me-1"></i> Quay lại
+                        </a>
+                        <button type="submit" class="btn btn-warning text-white">
+                            <i class="bi bi-save me-1"></i> Lưu thay đổi
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
