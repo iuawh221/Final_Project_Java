@@ -22,16 +22,16 @@ public class CartController {
     @GetMapping
     public String showCart(Model model) {
         model.addAttribute("cart", cartService.getCart());
-        return "cart/index"; // giao diện giỏ hàng
+        return "Restaurant/cart";
     }
 
     @PostMapping("/add/{foodId}")
     @ResponseBody
-    public Cart addToCart(@PathVariable String foodId,
+    public String addToCart(@PathVariable String foodId,
                           @RequestParam(defaultValue = "1") int quantity) {
         Food food = foodRepository.findById(foodId).orElseThrow();
         cartService.addItem(food, quantity);
-        return cartService.getCart();
+        return "Restaurant/cart";
     }
 
     @GetMapping("/remove/{foodId}")

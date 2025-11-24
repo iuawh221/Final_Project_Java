@@ -11,15 +11,11 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-//        registry.addInterceptor(new JwtInterceptor())
-//                .addPathPatterns("/admin/**") // chỉ kiểm tra các endpoint admin
-//                .excludePathPatterns(Arrays.asList(
-//                        "/welcome",
-//                        "/auth/**",        // cho phép login/register không cần token
-//                        "/api/public/**",  // các API public
-//                        "/ui/**" ,
-//                        "/admin/login"// giao diện
-//                ));
+        registry.addInterceptor(new JwtInterceptor())
+                .addPathPatterns("/admin/**") // chỉ kiểm tra các endpoint admin
+                .excludePathPatterns(Arrays.asList(
+                        "/admin/login"
+                ));
    }
 }
 

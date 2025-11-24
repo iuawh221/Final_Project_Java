@@ -5,6 +5,7 @@ import com.example.Final_Project_Java.repository.FoodRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -23,4 +24,11 @@ public class FoodService {
     public void delete(String id) {
         foodRepository.deleteById(id);
     }
+    public List<Food> getCheapestFoods(int limit) {
+        return foodRepository.findAll().stream()
+                .sorted(Comparator.comparing(Food::getPrice))
+                .limit(limit)
+                .toList();
+    }
+
 }

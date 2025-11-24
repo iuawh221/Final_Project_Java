@@ -8,8 +8,6 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -59,7 +57,7 @@ public class HomeController {
         Cookie jwtCookie = new Cookie("token", token);
         jwtCookie.setHttpOnly(true);
         jwtCookie.setPath("/");
-        jwtCookie.setMaxAge(4 * 60 * 60 * 1000); // 1 giờ
+        jwtCookie.setMaxAge(4 * 60 * 60);
         response.addCookie(jwtCookie);
 
         System.out.println(token);
@@ -77,15 +75,6 @@ public class HomeController {
         return "redirect:/admin/login";
     }
 
-
-    @GetMapping("/index")
-    public String getIndex(){
-        return "Restaurant/index";
-    }
-    @GetMapping("/menu")
-    public String getMenu(){
-        return "Restaurant/menu";
-    }
     @GetMapping("/admin/index")
     public String getIndexAdmin(){
         return "Restaurant/admin/adminIndex";
