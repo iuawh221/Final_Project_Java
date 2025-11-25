@@ -18,8 +18,10 @@ public class IndexController {
     FoodService foodService;
     @GetMapping("/index")
     public String getIndex(Model model){
-            List<Food> foods = foodService.getCheapestFoods(2);
+        List<Food> foods = foodService.getCheapestFoods(6);
         model.addAttribute("foods", foods);
+
+
         return "Restaurant/index";
     }
 }

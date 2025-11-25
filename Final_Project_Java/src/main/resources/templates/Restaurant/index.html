@@ -51,7 +51,7 @@
                     </div>  
                     <div class="main-menu">
                         <ul>
-                            <li class="active"><a href="index.html">home</a></li>
+                            <li class="active"><a href="index">home</a></li>
                             <li><a href="about.html">about</a></li>
                             <li><a href="menu">menu</a></li>
                                 <ul class="sub-menu">
@@ -117,32 +117,34 @@
                 </div>
             </div>
             <div class="row flex-nowrap overflow-auto" >
-                <div class="col-md-3 col-sm-6" th:each="food : ${foods}">
-                    <div class="single-food">
-                        <div class="food-img">
-                            <img th:src="@{'/images/' + ${food.imageUrl}}" class="img-fluid" alt="">
-                        </div>
-                        <div class="food-content">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <h5 th:text="${food.name}">Tên món</h5>
-                                <span class="style-change" th:text="${food.price}">Giá</span>
-                            </div>
-                            <p class="pt-3" th:text="${food.description}">Mô tả</p>
+                <div class="row">
+                    <div class="col-md-4 col-sm-6 mb-4" th:each="food : ${foods}">
+                        <a th:href="@{/food/{id}(id=${food.id})}" style="text-decoration: none; color: inherit;">
+                            <div class="single-food">
+                                <div class="food-img">
+                                    <img th:src="@{'/images/' + ${food.imageUrl}}" class="img-fluid" alt="">
+                                </div>
+                                <div class="food-content">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <h5 th:text="${food.name}">Tên món</h5>
+                                        <span class="style-change" th:text="${food.price}">Giá</span>
+                                    </div>
+                                    <p class="pt-3" th:text="${food.description}">Mô tả</p>
 
-                            <!-- Form POST để thêm vào giỏ hàng -->
-                            <form th:action="@{/cart/add/{id}(id=${food.id})}" method="post">
-                                <input type="hidden" name="quantity" value="1"/>
-                                <button type="submit" class="btn btn-warning w-100 mt-3">
-                                    <i class="bi bi-cart-plus"></i> Add to Cart
-                                </button>
-                            </form>
-                        </div>
+                                    <form th:action="@{/cart/add/{id}(id=${food.id})}" method="post">
+                                        <input type="hidden" name="quantity" value="1"/>
+                                        <button type="submit" class="btn btn-warning w-100 mt-1">
+                                            <i class="bi bi-cart-plus"></i> Add to Cart
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- Food Area End -->
 
     <!-- Reservation Area Starts -->
     <div class="reservation-area section-padding text-center">

@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+
 @Controller
 @RequestMapping("/cart")
 public class CartController {
@@ -21,24 +23,28 @@ public class CartController {
 
     @GetMapping
     public String showCart(Model model) {
-        model.addAttribute("cart", cartService.getCart());
+        Cart cart = cartService.getCart();
+        model.addAttribute("cartItems", cart.getItems());//list
+        model.addAttribute("totalPrice", cart.getItems().stream()
+                .mapToDouble(item -> item.getFood().getPrice() * item.getQuantity())
+                .sum());
         return "Restaurant/cart";
     }
 
     @PostMapping("/add/{foodId}")
-    @ResponseBody
     public String addToCart(@PathVariable String foodId,
                           @RequestParam(defaultValue = "1") int quantity) {
         Food food = foodRepository.findById(foodId).orElseThrow();
         cartService.addItem(food, quantity);
-        return "Restaurant/cart";
+        return "redirect:/cart";
     }
 
-    @GetMapping("/remove/{foodId}")
-    public String removeFromCart(@PathVariable String foodId) {
+    @PostMapping("/remove")
+    public String removeFromCart(@RequestParam String foodId) {
         cartService.removeItem(foodId);
         return "redirect:/cart";
     }
+
 
     @PostMapping("/update/{foodId}")
     public String updateQuantity(@PathVariable String foodId,

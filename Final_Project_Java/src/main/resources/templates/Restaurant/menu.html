@@ -20,6 +20,33 @@
     <link rel="stylesheet" href="assets/css/jquery.datetimepicker.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
+<style>
+    .category-pill {
+        padding: 8px 18px;
+        border-radius: 25px;
+        background: #ffe08a;
+        border: 1px solid #e0b44c;
+        color: #7a5200;
+        font-weight: 600;
+        margin-right: 8px;
+        transition: 0.25s;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .category-pill:hover {
+        background: #ffcf5b;
+        color: #543600;
+        transform: translateY(-2px);
+    }
+
+    .category-pill.active {
+        background: #ffb400 !important;
+        color: #fff !important;
+        border-color: #ff9800 !important;
+        box-shadow: 0 0 10px rgba(255, 174, 0, 0.6);
+    }
+</style>
 <body>
     <!-- Preloader Starts -->
     <div class="preloader">
@@ -86,29 +113,61 @@
                     </div>
                 </div>
             </div>
-            <div class="row flex-nowrap overflow-auto" >
-                <div class="col-md-3 col-sm-6" th:each="food : ${foods}">
-                    <div class="single-food">
-                        <div class="food-img">
-                            <img th:src="@{'/images/' + ${food.imageUrl}}" class="img-fluid" alt="">
-                        </div>
-                        <div class="food-content">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <h5 th:text="${food.name}">Tên món</h5>
-                                <span class="style-change" th:text="${food.price}">Giá</span>
-                            </div>
-                            <p class="pt-3" th:text="${food.description}">Mô tả</p>
+            <div class="mb-4">
+                <!-- Nút Tất cả -->
+                <a th:href="@{/menu}"
+                   class="category-pill"
+                   th:classappend="${selectedCategory == null} ? ' active'">
+                    Tất cả
+                </a>
+                <!-- Các Category -->
+                <a th:each="cat : ${categories}"
+                   th:href="@{/menu(category=${cat.name})}"
+                   th:text="${cat.name}"
+                   class="category-pill"
+                   th:classappend="${selectedCategory == cat.name} ? ' active'">
+                </a>
+            </div>
 
-                            <!-- Form POST để thêm vào giỏ hàng -->
-                            <form th:action="@{/cart/add/{id}(id=${food.id})}" method="post">
-                                <input type="hidden" name="quantity" value="1"/>
-                                <button type="submit" class="btn btn-warning w-100 mt-3">
-                                    <i class="bi bi-cart-plus"></i> Add to Cart
-                                </button>
-                            </form>
-                        </div>
+            <div class="row flex-nowrap overflow-auto" >
+                <div class="row">
+                    <div class="col-md-4 col-sm-6 mb-4" th:each="food : ${foods}">
+                        <a th:href="@{/food/{id}(id=${food.id})}" style="text-decoration: none; color: inherit;">
+                            <div class="single-food">
+                                <div class="food-img">
+                                    <img th:src="@{'/images/' + ${food.imageUrl}}" class="img-fluid" alt="">
+                                </div>
+                                <div class="food-content">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <h5 th:text="${food.name}">Tên món</h5>
+                                        <span class="style-change" th:text="${food.price}">Giá</span>
+                                    </div>
+                                    <p class="pt-3" th:text="${food.description}">Mô tả</p>
+
+                                    <form th:action="@{/cart/add/{id}(id=${food.id})}" method="post">
+                                        <input type="hidden" name="quantity" value="1"/>
+                                        <button type="submit" class="btn btn-warning w-100 mt-1">
+                                            <i class="bi bi-cart-plus"></i> Add to Cart
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </a>
                     </div>
                 </div>
+            </div>
+            <div class="pagination mt-4 text-center">
+                <a th:if="${currentPage > 0}"
+                   th:href="@{/menu(page=${currentPage-1})}" class="btn btn-light me-2">Previous</a>
+
+                <span th:each="i : ${#numbers.sequence(0, totalPages-1)}">
+                        <a th:href="@{/menu(page=${i})}"
+                           th:text="${i + 1}"
+                           th:classappend="${i == currentPage} ? ' btn btn-warning mx-1' : ' btn btn-light mx-1'"></a>
+                    </span>
+
+                <a th:if="${currentPage < totalPages-1}"
+                   th:href="@{/menu(page=${currentPage+1})}" class="btn btn-light ms-2">Next</a>
             </div>
         </div>
     </section>
