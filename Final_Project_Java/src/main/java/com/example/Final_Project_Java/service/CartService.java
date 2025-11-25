@@ -1,9 +1,12 @@
 package com.example.Final_Project_Java.service;
 
 import com.example.Final_Project_Java.model.Cart;
+import com.example.Final_Project_Java.model.CartItem;
 import com.example.Final_Project_Java.model.Food;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
+
+import java.util.List;
 
 @Service
 @SessionScope
@@ -29,5 +32,9 @@ public class CartService {
     public void clearCart() {
         cart.clear();
     }
+
+
+
+
 }
 

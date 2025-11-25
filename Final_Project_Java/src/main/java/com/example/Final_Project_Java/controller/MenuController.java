@@ -13,11 +13,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
 @Controller
+
 public class MenuController {
 
     @Autowired
@@ -43,6 +45,19 @@ public class MenuController {
         model.addAttribute("totalPages", foodPage.getTotalPages());
 
         return "Restaurant/menu";
+    }
+    @GetMapping("/menu/detail")
+    public String getFoodDetail(@RequestParam String id, Model model) {
+
+        Food food = foodService.getFoodById(id);
+
+        List<Food> relatedFoods = foodService.getRelatedFoods(food.getCategory(), food.getId());
+
+        // Đưa dữ liệu ra view
+        model.addAttribute("food", food);
+        model.addAttribute("relatedFoods", relatedFoods);
+
+        return "Restaurant/foodDetail";
     }
 
 }

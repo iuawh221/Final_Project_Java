@@ -69,6 +69,7 @@
                     <th>Tổng tiền</th>
                     <th>Trạng thái</th>
                     <th>Ngày tạo</th>
+                    <th>Món ăn</th>
                     <th class="text-center">Cập nhật trạng thái</th>
                 </tr>
                 </thead>
@@ -81,6 +82,14 @@
                     <td th:text="${order.totalAmount} + ' VNĐ'"></td>
                     <td th:text="${order.status}"></td>
                     <td th:text="${#temporals.format(order.createdAt, 'dd/MM/yyyy HH:mm')}"></td>
+                    <td>
+                        <ul class="list-unstyled mb-0">
+                            <li th:each="item : ${order.items}">
+                                <span th:text="${item.foodName}"></span>
+                                (<span th:text="${item.quantity}"></span>)
+                            </li>
+                        </ul>
+                    </td>
                     <td class="text-center">
                         <form th:action="@{'/admin/orders/update-status/' + ${order.id}}" method="post" class="d-inline">
                             <select name="status" class="form-select form-select-sm d-inline w-auto">

@@ -1,7 +1,9 @@
 package com.example.Final_Project_Java.controller;
 
 
+import com.example.Final_Project_Java.model.Order;
 import com.example.Final_Project_Java.model.User;
+import com.example.Final_Project_Java.repository.OrderRepository;
 import com.example.Final_Project_Java.repository.UserRepository;
 import com.example.Final_Project_Java.util.JwtUtil;
 import jakarta.servlet.http.Cookie;
@@ -9,6 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -75,6 +78,8 @@ public class HomeController {
         return "redirect:/admin/login";
     }
 
+    @Autowired
+    OrderRepository orderRepository;
     @GetMapping("/admin/index")
     public String getIndexAdmin(){
         return "Restaurant/admin/adminIndex";
@@ -83,5 +88,6 @@ public class HomeController {
     public String getBooking(){
         return "Restaurant/booking";
     }
+
 
 }
