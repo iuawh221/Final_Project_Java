@@ -46,6 +46,41 @@
         border-color: #ff9800 !important;
         box-shadow: 0 0 10px rgba(255, 174, 0, 0.6);
     }
+    .food-img {
+        width: 100%;
+        height: 250px; /* bạn có thể chỉnh chiều cao theo ý */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden; /* tránh ảnh tràn ra ngoài */
+    }
+       .food-img img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: cover; /* giữ tỷ lệ, lấp đầy khung */
+        display: block;
+        margin: auto; /* canh giữa */
+    }
+
+    .single-food {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    }
+
+    .food-content {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+
+    .food-content form {
+        margin-top: auto; /* đẩy nút xuống cuối */
+    }
+
+
+
+
 </style>
 <body>
     <!-- Preloader Starts -->
@@ -68,20 +103,14 @@
                         <span></span>
                         <span></span>
                         <span></span>
-                    </div>  
+                    </div>
                     <div class="main-menu main-menu2">
                         <ul>
                             <li class="active"><a href="index">home</a></li>
-                            <li><a href="about.html">about</a></li>
+                            <li><a href="cart">cart</a></li>
                             <li><a href="search">Search</a></li>
                             <li><a href="menu">menu</a></li>
-                                <ul class="sub-menu">
-                                    <li><a href="blog-home.html">Blog Home</a></li>
-                                    <li><a href="blog-details.html">Blog Details</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="contact-us.html">contact</a></li>
-                            <li><a href="elements.html">Elements</a></li>
+                            <li><a href="contact-us">contact</a></li>
                         </ul>
                     </div>
                 </div>
@@ -136,7 +165,7 @@
                         <a th:href="@{/menu/detail(id=${food.id})}" style="text-decoration: none; color: inherit;">
                             <div class="single-food">
                                 <div class="food-img">
-                                    <img th:src="@{'/images/' + ${food.imageUrl}}" class="img-fluid" alt="">
+                                    <img th:src="@{${food.imageUrl}}" class="img-fluid" alt="">
                                 </div>
                                 <div class="food-content">
                                     <div class="d-flex justify-content-between align-items-center">
@@ -187,28 +216,46 @@
             </div>
             <div class="row">
                 <div class="col-lg-8 offset-lg-2">
-                    <form action="#">
+                    <form action="/book-table" method="post">
+
+                        <!-- Name -->
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                              <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                <span class="input-group-text"><i class="fa fa-user-o"></i></span>
                             </div>
-                            <input type="text" id="datepicker">
+                            <input type="text" name="name" placeholder="Your name" required>
                         </div>
+
+                        <!-- Date -->
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                              <span class="input-group-text"><i class="fa fa-clock-o"></i></span>
+                                <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                             </div>
-                            <input type="text" id="datepicker2">
+                            <input type="text" id="datepicker" name="date" required>
                         </div>
+
+                        <!-- Time -->
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                              <span class="input-group-text"><i class="fa fa-user-o"></i></span>
+                                <span class="input-group-text"><i class="fa fa-clock-o"></i></span>
                             </div>
-                            <input type="text">
+                            <input type="text" id="datepicker2" name="time" required>
                         </div>
+
+                        <!-- Guests -->
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-users"></i></span>
+                            </div>
+                            <input type="number" name="guests" placeholder="Number of guests" required>
+                        </div>
+
                         <div class="table-btn text-center">
-                            <a href="#" class="template-btn template-btn2 mt-4">book a table</a>
+                            <button class="template-btn template-btn2 mt-4" type="submit">
+                                book a table
+                            </button>
                         </div>
+
                     </form>
                 </div>
             </div>
@@ -275,18 +322,6 @@
                         <span><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></span>
-                    </div>
-                    <div class="col-lg-5 col-md-6">
-                        <div class="social-icons">
-                            <ul>
-                                <li class="no-margin">Follow Us</li>
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                            </ul>
-                        </div>
                     </div>
                 </div>
             </div>

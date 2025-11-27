@@ -13,12 +13,12 @@
     <link rel="shortcut icon" href="assets/images/logo/favicon.png" type="image/x-icon">
 
     <!-- CSS Files -->
-    <link rel="stylesheet" href="/assets/css/animate-3.7.0.css">
-    <link rel="stylesheet" href="/assets/css/font-awesome-4.7.0.min.css">
-    <link rel="stylesheet" href="/assets/css/bootstrap-4.1.3.min.css">
-    <link rel="stylesheet" href="/assets/css/owl-carousel.min.css">
-    <link rel="stylesheet" href="/assets/css/jquery.datetimepicker.min.css">
-    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/animate-3.7.0.css">
+    <link rel="stylesheet" href="assets/css/font-awesome-4.7.0.min.css">
+    <link rel="stylesheet" href="assets/css/bootstrap-4.1.3.min.css">
+    <link rel="stylesheet" href="assets/css/owl-carousel.min.css">
+    <link rel="stylesheet" href="assets/css/jquery.datetimepicker.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <style>
     .category-pill {
@@ -60,7 +60,7 @@
         <div class="row">
             <div class="col-lg-2">
                 <div class="logo-area">
-                    <a href="/index"><img src="/assets/images/logo/logo2.png" alt="logo"></a>
+                    <a href="index"><img src="assets/images/logo/logo2.png" alt="logo"></a>
                 </div>
             </div>
             <div class="col-lg-10">
@@ -71,11 +71,11 @@
                 </div>
                 <div class="main-menu main-menu2">
                     <ul>
-                        <li class="active"><a href="/index">home</a></li>
-                        <li><a href="/cart">cart</a></li>
-                        <li><a href="/search">Search</a></li>
-                        <li><a href="/menu">menu</a></li>
-                        <li><a href="/contact-us">contact</a></li>
+                        <li class="active"><a href="index">home</a></li>
+                        <li><a href="cart">cart</a></li>
+                        <li><a href="search">Search</a></li>
+                        <li><a href="menu">menu</a></li>
+                        <li><a href="contact-us">contact</a></li>
                     </ul>
                 </div>
             </div>
@@ -89,58 +89,37 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <h1><i>Detail</i></h1>
-                <p class="pt-2"><i>Beast kind form divide night above let moveth bearing darkness.</i></p>
+                <h1><i>Booking</i></h1>
             </div>
         </div>
     </div>
 </section>
 <!-- Banner Area End -->
 
-<section class="food-detail section-padding">
+<!-- Success Area -->
+<section class="section-padding">
     <div class="container">
         <div class="row">
-            <!-- Ảnh món ăn -->
-            <div class="col-md-6">
-                <img th:src="@{${food.imageUrl}}"
-                     class="img-fluid rounded"
-                     alt="Food Image">
-            </div>
+            <div class="col-lg-8 offset-lg-2">
 
-            <!-- Nội dung chi tiết -->
-            <div class="col-md-6">
-                <h2 th:text="${food.name}">Tên món ăn</h2>
-                <h4 class="text-success fw-bold" th:text="${food.price}">Giá</h4>
+                <div class="success-box">
+                    <h2 class="success-title">🎉 Thank You for Your Booking!</h2>
+                    <p class="mt-3">Your table reservation has been successfully received.</p>
 
-                <p class="mt-3" th:text="${food.description}">Mô tả ngắn gọn về món ăn</p>
-
-                <!-- Chi tiết thêm -->
-                <div class="mt-3">
-                    <h5>Chi tiết món ăn</h5>
-                    <p th:text="${food.detail}">Thông tin chi tiết, nguyên liệu, cách chế biến...</p>
-                </div>
-
-                <!-- Category -->
-                <div class="mt-3">
-                    <span class="badge bg-primary" th:text="${food.category}">Category</span>
-                </div>
-
-                <!-- Form Add to Cart -->
-                <form th:action="@{/cart/add/{id}(id=${food.id})}" method="post" class="mt-4">
-                    <div class="input-group mb-3" style="max-width: 250px;">
-                        <input type="number" name="quantity" value="1" min="1" class="form-control">
-                        <button type="submit" class="btn btn-warning">
-                            <i class="bi bi-cart-plus"></i> Add to Cart
-                        </button>
+                    <div class="booking-info">
+                        <p>Name: <span th:text="${booking.name}"></span></p>
+                        <p>Date: <span th:text="${booking.date}"></span></p>
+                        <p>Time: <span th:text="${booking.time}"></span></p>
+                        <p>Guests: <span th:text="${booking.guests}"></span></p>
                     </div>
-                </form>
+
+                    <a href="menu" class="btn btn-warning mt-4">Back to Menu</a>
+                </div>
+
             </div>
         </div>
     </div>
 </section>
-
-
-
 
 <!-- Table Area Starts -->
 <section class="table-area section-padding">
@@ -155,46 +134,28 @@
         </div>
         <div class="row">
             <div class="col-lg-8 offset-lg-2">
-                <form action="/book-table" method="post">
-
-                    <!-- Name -->
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fa fa-user-o"></i></span>
-                        </div>
-                        <input type="text" name="name" placeholder="Your name" required>
-                    </div>
-
-                    <!-- Date -->
+                <form action="#">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                         </div>
-                        <input type="text" id="datepicker" name="date" required>
+                        <input type="text" id="datepicker">
                     </div>
-
-                    <!-- Time -->
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fa fa-clock-o"></i></span>
                         </div>
-                        <input type="text" id="datepicker2" name="time" required>
+                        <input type="text" id="datepicker2">
                     </div>
-
-                    <!-- Guests -->
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fa fa-users"></i></span>
+                            <span class="input-group-text"><i class="fa fa-user-o"></i></span>
                         </div>
-                        <input type="number" name="guests" placeholder="Number of guests" required>
+                        <input type="text">
                     </div>
-
                     <div class="table-btn text-center">
-                        <button class="template-btn template-btn2 mt-4" type="submit">
-                            book a table
-                        </button>
+                        <a href="" class="template-btn template-btn2 mt-4">book a table</a>
                     </div>
-
                 </form>
             </div>
         </div>
@@ -262,6 +223,18 @@
 Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
                             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></span>
                 </div>
+                <div class="col-lg-5 col-md-6">
+                    <div class="social-icons">
+                        <ul>
+                            <li class="no-margin">Follow Us</li>
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                            <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -270,12 +243,12 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 
 <!-- Javascript -->
-<script src="/assets/js/vendor/jquery-2.2.4.min.js"></script>
-<script src="/assets/js/vendor/bootstrap-4.1.3.min.js"></script>
-<script src="/assets/js/vendor/wow.min.js"></script>
-<script src="/assets/js/vendor/owl-carousel.min.js"></script>
-<script src="/assets/js/vendor/jquery.datetimepicker.full.min.js"></script>
-<script src="/assets/js/vendor/jquery.nice-select.min.js"></script>
-<script src="/assets/js/main.js"></script>
+<script src="assets/js/vendor/jquery-2.2.4.min.js"></script>
+<script src="assets/js/vendor/bootstrap-4.1.3.min.js"></script>
+<script src="assets/js/vendor/wow.min.js"></script>
+<script src="assets/js/vendor/owl-carousel.min.js"></script>
+<script src="assets/js/vendor/jquery.datetimepicker.full.min.js"></script>
+<script src="assets/js/vendor/jquery.nice-select.min.js"></script>
+<script src="assets/js/main.js"></script>
 </body>
 </html>

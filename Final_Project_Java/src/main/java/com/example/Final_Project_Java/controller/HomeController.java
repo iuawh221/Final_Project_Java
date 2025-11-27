@@ -88,6 +88,8 @@ public class HomeController {
     public String getBooking(){
         return "Restaurant/booking";
     }
-
-
+    @GetMapping("/contact-us")
+    public String getContact(){
+        return "Restaurant/contact-us";
+    }
 }
