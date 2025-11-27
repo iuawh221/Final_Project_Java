@@ -25,17 +25,13 @@ public class HomeController {
     private MongoTemplate mongoTemplate;
     @Autowired
     UserRepository userRepository;
-    @GetMapping("/ping")
-    public String pingMongo() {
-        return mongoTemplate.getDb().getName(); // sẽ trả về "Final_Project"
-    }
 
-    @GetMapping("/admin/login")
+    @GetMapping("/login")
     public String loginForm() {
         return "Restaurant/admin/adminLogin"; // Thymeleaf login page
     }
 
-    @PostMapping("/admin/login")
+    @PostMapping("/login")
     public String login(@RequestParam String username,
                         @RequestParam String password,
                         HttpServletResponse response) {
@@ -43,18 +39,19 @@ public class HomeController {
         Optional<User> userOpt = userRepository.findByUsername(username);
 
         if (userOpt.isEmpty()) {
-            return "redirect:/admin/login?error=usernotfound";
+            return "redirect:/login?error=usernotfound";
         }
 
         User user = userOpt.get();
 
         if (!user.getPassword().equals(password)) {
-            return "redirect:/admin/login?error=wrongpassword";
+            return "redirect:/login?error=wrongpassword";
         }
 
         Map<String, Object> claims = new HashMap<>();
         claims.put("username", user.getUsername());
         claims.put("email", user.getEmail());
+        claims.put("role", user.getRole());
 
         String token = JwtUtil.generateToken(claims);
         Cookie jwtCookie = new Cookie("token", token);
@@ -75,21 +72,14 @@ public class HomeController {
         cookie.setMaxAge(0); // xóa ngay
         response.addCookie(cookie);
 
-        return "redirect:/admin/login";
+        return "redirect:/login";
     }
 
     @Autowired
     OrderRepository orderRepository;
-    @GetMapping("/admin/index")
-    public String getIndexAdmin(){
-        return "Restaurant/admin/adminIndex";
-    }
     @GetMapping("/booking")
     public String getBooking(){
         return "Restaurant/booking";
     }
-    @GetMapping("/contact-us")
-    public String getContact(){
-        return "Restaurant/contact-us";
-    }
+
 }

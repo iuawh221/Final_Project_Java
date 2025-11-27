@@ -5,6 +5,7 @@ import com.example.Final_Project_Java.repository.FoodRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
@@ -52,6 +53,11 @@ public class FoodService {
 
     public List<Food> getRelatedFoods(String category, String excludeId) {
         return foodRepository.findTop5ByCategoryAndIdNot(category, excludeId);
+    }
+    public List<Food> getTopNewestFoods(int i) {
+        return foodRepository.findAll(
+                PageRequest.of(0, i, Sort.by(Sort.Direction.DESC, "createdAt"))
+        ).getContent();
     }
 
 }

@@ -2,6 +2,7 @@ package com.example.Final_Project_Java.controller.Admin;
 
 import com.example.Final_Project_Java.model.Order;
 import com.example.Final_Project_Java.repository.OrderRepository;
+import com.example.Final_Project_Java.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,9 +17,11 @@ public class AdminOrderController {
     @Autowired
     private OrderRepository orderRepository;
 
+    @Autowired
+    OrderService orderService;
     @GetMapping
     public String listOrders(Model model) {
-        model.addAttribute("orders", orderRepository.findAll());
+        model.addAttribute("orders",orderService.getAllOrdersDesc() );
         return "Restaurant/admin/adminOrder"; // trỏ tới template admin/orders.html
     }
 

@@ -28,6 +28,9 @@ public class IndexController {
         List<Food> foods = foodService.getCheapestFoods(6);
         model.addAttribute("foods", foods);
 
+        List<Food> topUpdate = foodService.getTopNewestFoods(3);
+
+        model.addAttribute("update", topUpdate);
         return "Restaurant/index";
     }
 
@@ -49,7 +52,6 @@ public class IndexController {
         reservationRepository.save(reservation);
 
         redirectAttributes.addAttribute("id", reservation.getId());
-
         // Redirect kèm id
         return "redirect:/booking-success";
     }

@@ -88,7 +88,7 @@
         <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
             <h2 class="page-title fw-bold mb-2 mb-md-0">Danh sách Food</h2>
 
-            <form th:action="@{/admin/food/search}" method="get" class="d-flex mb-2 mb-md-0" style="flex: 1; max-width: 500px;">
+            <form th:action="@{/admin/contact/search}" method="get" class="d-flex mb-2 mb-md-0" style="flex: 1; max-width: 500px;">
                 <input type="text" name="keyword" class="form-control rounded-start border-0 shadow-sm" placeholder="Tìm theo tên..." style="flex: 1;" />
                 <button type="submit" class="btn btn-dark rounded-end shadow-sm px-4" style="flex: 0 0 150px;">
                     <i class="bi bi-search me-1"></i> Tìm kiếm
@@ -100,40 +100,29 @@
             </a>
         </div>
 
-        <!-- TABLE FOOD -->
         <div class="table-wrapper">
             <table class="table table-hover align-middle mb-0">
                 <thead>
                 <tr>
                     <th style="width: 5%">ID</th>
-                    <th style="width: 15%">Ảnh</th>
                     <th style="width: 20%">Tên</th>
-                    <th style="width: 25%">Mô tả</th>
-                    <th style="width: 15%">Giá</th>
-                    <th style="width: 10%">Danh mục</th>
-                    <th style="width: 10%" class="text-center">Hành động</th>
+                    <th style="width: 25%">Email</th>
+                    <th style="width: 20%">Subject</th>
+                    <th style="width: 30%">Message</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="food : ${foods}">
-                    <td th:text="${food.id}"></td>
-                    <td><img th:src="${food.imageUrl}" class="food-img" /></td>
-                    <td th:text="${food.name}"></td>
-                    <td th:text="${food.description}"></td>
-                    <td th:text="${food.price} + '$'"></td>
-                    <td th:text="${food.category}"></td>
-                    <td class="text-center">
-                        <a th:href="@{'/admin/food/edit/' + ${food.id}}" class="btn btn-sm btn-edit me-1">
-                            <i class="bi bi-pencil"></i>
-                        </a>
-                        <button class="btn btn-sm btn-delete" data-bs-toggle="modal" data-bs-target="#deleteModal" th:attr="data-id=${food.id}">
-                            <i class="bi bi-trash"></i>
-                        </button>
-                    </td>
+                <tr th:each="contact : ${contact}">
+                    <td th:text="${contact.id}"></td>
+                    <td th:text="${contact.name}"></td>
+                    <td th:text="${contact.email}"></td>
+                    <td th:text="${contact.subject}"></td>
+                    <td th:text="${contact.message}"></td>
                 </tr>
                 </tbody>
             </table>
         </div>
+
 
     </div>
 </div>

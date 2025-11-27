@@ -11,4 +11,6 @@ public interface ReservationRepository extends MongoRepository<Reservation,Strin
     Optional<Object> findById(Integer bookingId);
 
     List<Reservation> findByNameContainingIgnoreCase(String keyword);
+
+    long countByDate(String date);
 }

@@ -26,7 +26,7 @@ public class JwtInterceptor implements HandlerInterceptor {
         }
 
         if (token == null || token.isEmpty()) {
-            response.sendRedirect("/admin/login");
+            response.sendRedirect("/login");
             return false;
         }
 
@@ -35,7 +35,7 @@ public class JwtInterceptor implements HandlerInterceptor {
             request.setAttribute("claims", claims);
             return true;
         } catch (JwtException e) {
-            response.sendRedirect("/admin/login");
+            response.sendRedirect("/login");
             return false;
         }
     }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <!-- Required Meta Tags -->
     <meta charset="UTF-8">
@@ -45,9 +45,9 @@
                         <ul>
                             <li class="active"><a href="index">home</a></li>
                             <li><a href="cart">cart</a></li>
+                            <li><a href="search">Search</a></li>
                             <li><a href="menu">menu</a></li>
                             <li><a href="contact-us">contact</a></li>
-                            <li><a href="elements">Elements</a></li>
                         </ul>
                     </div>
                 </div>
@@ -103,14 +103,19 @@
                     </div>
                 </div>
                 <div class="col-lg-9">
-                    <form action="#">
+                    <form th:action="@{/contact-us}"  method="post">
                         <div class="left">
-                            <input type="text" placeholder="Enter your name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your name'" required>
-                            <input type="email" placeholder="Enter email address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'" required>
-                            <input type="text" placeholder="Enter subject" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter subject'" required>
+                            <input type="text" name="name" placeholder="Enter your name"
+                                   onfocus="this.placeholder=''" onblur="this.placeholder='Enter your name'" required>
+
+                            <input type="email" name="email" placeholder="Enter email address"
+                                   onfocus="this.placeholder=''" onblur="this.placeholder='Enter email address'" required>
+
+                            <input type="text" name="subject" placeholder="Enter subject"
+                                   onfocus="this.placeholder=''" onblur="this.placeholder='Enter subject'" required>
                         </div>
                         <div class="right">
-                            <textarea name="message" cols="20" rows="7"  placeholder="Enter Message" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Message'" required></textarea>
+                            <textarea name="message" cols="20" rows="7" placeholder="Enter Message" required></textarea></textarea>
                         </div>
                         <button type="submit" class="template-btn">subscribe now</button>
                     </form>
@@ -128,7 +133,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="single-widget single-widget1">
-                            <a href="index.html"><img src="assets/images/logo/logo2.png" alt=""></a>
+                            <a href="index"><img src="assets/images/logo/logo2.png" alt=""></a>
                             <p class="mt-3">Which morning fourth great won't is to fly bearing man. Called unto shall seed, deep, herb set seed land divide after over first creeping. First creature set upon stars deep male gathered said she'd an image spirit our</p>
                         </div>
                     </div>
