@@ -114,6 +114,7 @@
 
             <!-- Đơn hàng đang chuẩn bị -->
             <div class="col-md-4">
+                <a th:href="@{/admin/orders}" style="text-decoration: none; color: inherit;">
                 <div class="dashboard-card bg-order">
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
@@ -123,10 +124,12 @@
                         <i class="bi bi-hourglass-split icon text-info"></i>
                     </div>
                 </div>
+                </a>
             </div>
 
             <!-- Đơn hàng giao -->
             <div class="col-md-4">
+                <a th:href="@{/admin/orders}" style="text-decoration: none; color: inherit;">
                 <div class="dashboard-card bg-order">
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
@@ -136,10 +139,12 @@
                         <i class="bi bi-truck icon text-info"></i>
                     </div>
                 </div>
+                </a>
             </div>
 
             <!-- Booking hôm nay -->
             <div class="col-md-4">
+                <a th:href="@{/admin/bookings}" style="text-decoration: none; color: inherit;">
                 <div class="dashboard-card bg-booking">
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
@@ -149,6 +154,7 @@
                         <i class="bi bi-calendar-check icon text-success"></i>
                     </div>
                 </div>
+                </a>
             </div>
 
         </div>
